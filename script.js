@@ -5,13 +5,16 @@ const elementInputUsername = document.getElementsByClassName("input-username")
 const secondaPagina = document.getElementById("pagina2")
 const btnEsci = document.getElementById("esci")
 const divChat = document.getElementById("chat")
-const inputMessagio = document.getElementById("messagio")
+const inputMessaggio = document.getElementById("messaggio")
+const btnInvia = document.getElementById("invia")
+
+
 
 function onClickAddedi() {
     primaPagina.style.visibility = "hidden"
     secondaPagina.style.visibility = "visible"
     let elementUsername = inputUsername.value
-    localStorage.setItem('username',elementUsername);
+    localStorage.setItem('save_username',username);
 }
 btnAccedi.addEventListener('click',onClickAddedi)
 
@@ -23,9 +26,6 @@ function abilityBtnAccedi() {
 for(let i=0; i<elementInputUsername.length; i++)
 elementInputUsername[i].addEventListener("keyup", abilityBtnAccedi);
 
-
-
-
 function onClickEsci() {
     primaPagina.style.visibility = "visible"
     secondaPagina.style.visibility = "hidden"
@@ -33,3 +33,23 @@ function onClickEsci() {
     inputUsername.value= "";
 }
 btnEsci.addEventListener('click',onClickEsci) 
+
+var messaggi = []
+function inviaMessaggio() {
+    const username = localStorage.getItem('save_username');
+    if (!username) {
+        alert ('verifica Username'); return;
+    }
+
+
+    const nuovoMessaggio = inputMessaggio.value ;
+    const invioTime = new Date();
+    const sentTime = invioTime.toLocaleTimeString();
+    const messaggioInviato = `${invioTime} - ${username}: ${nuovoMessaggio}`;
+    messaggi.push(messaggioInviato);
+
+    divChat.innerHTML = messaggi.join('<br>');
+    inputMessaggio.value=""; 
+
+}
+btnInvia.addEventListener("click",inviaMessaggio)
