@@ -44,8 +44,9 @@ function inviaMessaggio() {
 
     const nuovoMessaggio = inputMessaggio.value ;
     const invioTime = new Date();
-    const sentTime = invioTime.toLocaleTimeString();
-    const messaggioInviato = `${invioTime} - ${username}: ${nuovoMessaggio}`;
+    //const sentTime = invioTime.toLocaleTimeString();
+    invioTime.getHours()
+    const messaggioInviato = `"${invioTime.getHours()}" + ":" + "${invioTime.getMinutes()}" + "${username}": "${nuovoMessaggio}"`;
     messaggi.push(messaggioInviato);
 
     divChat.innerHTML = messaggi.join('<br>');
